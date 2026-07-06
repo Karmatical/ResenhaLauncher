@@ -499,19 +499,10 @@ body, button {
 #loginTitleImage {
     border-radius: 4px; 
     background: transparent;
-    
-    /* Regras de dimensionamento para imagens retangulares */
     width: 120%;          /* Ocupa a largura disponível do contêiner do formulário */
-    max-width: 420px;     /* Impede que uma imagem gigante quebre o layout */
+    max-width: 680px;     /* Impede que uma imagem gigante quebre o layout */
     height: auto;         /* Calcula a altura proporcionalmente para NÃO distorcer */
-    
-    /* Preserva os detalhes visuais caso precise encolher */
     object-fit: contain;  
-    
-    /* Efeitos visuais adaptados */
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4);
-    
-    /* Centralização e espaçamento */
     display: block;
     margin: 0 auto 25px auto; 
 }
