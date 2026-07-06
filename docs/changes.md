@@ -33,3 +33,16 @@ logo                    account
 - check for new releases in https://github.com/Karmatical/ResenhaLauncher/releases
 
 
+----------------------------------------
+
+
+Removido tela de login
+    loginOptions.ejs
+    loginOptions.js
+
+Removido login pela microsoft
+    authmanager.js
+
+
+
+

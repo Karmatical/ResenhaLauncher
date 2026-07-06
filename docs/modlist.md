@@ -13,7 +13,8 @@ Gravestone Mod
 MTS/IV
 Iron Barrels
 KleeSlabs
-HBM NTM Extended            HBM NTM Original
+HBM NTM Extended            HBM NTM Space
+HBM NTM Structure
 Spartan HUD Baubles
 Better than Mending
 Thermal Expansion
@@ -35,7 +36,6 @@ Reach Fix
 No recipe book
 Aquaculture 2
 YUNG Better Caves
-HBM NTM Structure
 Chisel
 JEI Resources
 Aqua Acrobatics

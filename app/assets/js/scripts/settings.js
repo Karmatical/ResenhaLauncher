@@ -527,10 +527,10 @@ function processLogOut(val, isLastAccount){
                 validateSelectedAccount()
             }
             if(isLastAccount) {
-                loginOptionsCancelEnabled(false)
-                loginOptionsViewOnLoginSuccess = VIEWS.settings
-                loginOptionsViewOnLoginCancel = VIEWS.loginOptions
-                switchView(getCurrentView(), VIEWS.loginOptions)
+                loginCancelEnabled(false)
+                loginViewOnLoginSuccess = VIEWS.settings
+                loginViewOnLoginCancel = VIEWS.login
+                switchView(getCurrentView(), VIEWS.login)
             }
         })
         $(parent).fadeOut(250, () => {
@@ -578,10 +578,10 @@ ipcRenderer.on(MSFT_OPCODE.REPLY_LOGOUT, (_, ...arguments_) => {
                     validateSelectedAccount()
                 }
                 if(isLastAccount) {
-                    loginOptionsCancelEnabled(false)
-                    loginOptionsViewOnLoginSuccess = VIEWS.settings
-                    loginOptionsViewOnLoginCancel = VIEWS.loginOptions
-                    switchView(getCurrentView(), VIEWS.loginOptions)
+                    loginCancelEnabled(false)
+                    loginViewOnLoginSuccess = VIEWS.settings
+                    loginViewOnLoginCancel = VIEWS.login
+                    switchView(getCurrentView(), VIEWS.login)
                 }
                 if(msAccDomElementCache) {
                     msAccDomElementCache.remove()

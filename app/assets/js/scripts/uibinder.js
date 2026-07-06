@@ -16,7 +16,6 @@ let fatalStartupError = false
 // Mapping of each view to their container IDs.
 const VIEWS = {
     landing: '#landingContainer',
-    loginOptions: '#loginOptionsContainer',
     login: '#loginContainer',
     settings: '#settingsContainer',
     welcome: '#welcomeContainer',
@@ -88,11 +87,11 @@ async function showMainUI(data){
                 currentView = VIEWS.landing
                 $(VIEWS.landing).fadeIn(1000)
             } else {
-                loginOptionsCancelEnabled(false)
-                loginOptionsViewOnLoginSuccess = VIEWS.landing
-                loginOptionsViewOnLoginCancel = VIEWS.loginOptions
-                currentView = VIEWS.loginOptions
-                $(VIEWS.loginOptions).fadeIn(1000)
+                loginCancelEnabled(false)
+                loginViewOnLoginSuccess = VIEWS.landing
+                loginViewOnLoginCancel = VIEWS.login
+                currentView = VIEWS.login
+                $(VIEWS.login).fadeIn(1000)
             }
         }
 
@@ -352,12 +351,12 @@ async function validateSelectedAccount(){
                     validateEmail(selectedAcc.username)
                 }
                 
-                loginOptionsViewOnLoginSuccess = getCurrentView()
-                loginOptionsViewOnLoginCancel = VIEWS.loginOptions
+                loginViewOnLoginSuccess = getCurrentView()
+                loginViewOnLoginCancel = VIEWS.login
 
                 if(accLen > 0) {
-                    loginOptionsViewOnCancel = getCurrentView()
-                    loginOptionsViewCancelHandler = () => {
+                    loginViewOnCancel = getCurrentView()
+                    loginViewCancelHandler = () => {
                         if(isMicrosoft) {
                             ConfigManager.addMicrosoftAuthAccount(
                                 selectedAcc.uuid,
@@ -374,12 +373,12 @@ async function validateSelectedAccount(){
                         ConfigManager.save()
                         validateSelectedAccount()
                     }
-                    loginOptionsCancelEnabled(true)
+                    loginCancelEnabled(true)
                 } else {
-                    loginOptionsCancelEnabled(false)
+                    loginCancelEnabled(false)
                 }
                 toggleOverlay(false)
-                switchView(getCurrentView(), VIEWS.loginOptions)
+                switchView(getCurrentView(), VIEWS.login)
             })
             setDismissHandler(() => {
                 if(accLen > 1){
