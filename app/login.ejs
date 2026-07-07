@@ -1,10 +1,4 @@
 <div id="loginContainer" style="display: none;">
-    <div id="loginCancelContainer" style="display: none;">
-        <button id="loginCancelButton">
-            <div id="loginCancelIcon">X</div>
-            <span id="loginCancelText"><%- lang('login.loginCancelText') %></span>
-        </button>
-    </div>
     <div id="loginContent">
         <form id="loginForm">
             <img id="loginTitleImage" src="assets/images/title.png"/>
@@ -18,7 +12,7 @@
                 <span class="loginErrorSpan" id="loginEmailError"><%- lang('login.loginEmailError') %></span>
                 <input id="loginUsername" class="loginField" type="text" placeholder="<%- lang('login.loginEmailPlaceholder') %>"/>
             </div>
-            <button id="loginButton" disabled>
+            <button id="loginButton">
                 <div id="loginButtonContent">
                     <%- lang('login.loginButtonText') %>
                     <svg id="loginSVG" viewBox="0 0 24.87 13.97">
@@ -27,9 +21,6 @@
                         </defs>
                         <polyline class="arrowLine" points="0.71 13.26 12.56 1.41 24.16 13.02"/>
                     </svg>
-                    <div class="circle-loader">
-                        <div class="checkmark draw"></div>
-                    </div>
                 </div>
             </button>
         </form>

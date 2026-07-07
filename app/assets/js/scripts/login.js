@@ -52,19 +52,19 @@ function validateEmail(value){
     if(value){
         if(!basicEmail.test(value) && !validUsername.test(value)){
             showError(loginEmailError, Lang.queryJS('login.error.invalidValue'))
-            loginDisabled(true)
+    //        loginDisabled(true)
             lu = false
         } else {
             loginEmailError.style.opacity = 0
             lu = true
             if(lp){
-                loginDisabled(false)
+    //            loginDisabled(false)
             }
         }
     } else {
         lu = false
         showError(loginEmailError, Lang.queryJS('login.error.requiredValue'))
-        loginDisabled(true)
+      //  loginDisabled(true)
     }
 }
 
@@ -78,17 +78,6 @@ loginUsername.addEventListener('focusout', (e) => {
 loginUsername.addEventListener('input', (e) => {
     validateEmail(e.target.value)
 })
-
-/**
- * Enable or disable the login button.
- * 
- * @param {boolean} v True to enable, false to disable.
- */
-function loginDisabled(v){
-    if(loginButton.disabled !== v){
-        loginButton.disabled = v
-    }
-}
 
 /**
  * Enable or disable loading elements.
@@ -105,62 +94,18 @@ function loginLoading(v){
     }
 }
 
-/**
- * Enable or disable login form.
- * 
- * @param {boolean} v True to enable, false to disable.
- */
-function formDisabled(v){
-    loginDisabled(v)
-    loginCancelButton.disabled = v
-    loginUsername.disabled = v
-    if(v){
-        checkmarkContainer.setAttribute('disabled', v)
-    } else {
-        checkmarkContainer.removeAttribute('disabled')
-    }
-    loginRememberOption.disabled = v
-}
-
 let loginViewOnSuccess = VIEWS.landing
 let loginViewOnCancel = VIEWS.settings
 let loginViewCancelHandler
-
-function loginCancelEnabled(val){
-    if(val){
-        $(loginCancelContainer).show()
-    } else {
-        $(loginCancelContainer).hide()
-    }
-}
-
-loginCancelButton.onclick = (e) => {
-    switchView(getCurrentView(), loginViewOnCancel, 500, 500, () => {
-        loginUsername.value = ''
-        loginCancelEnabled(false)
-        if(loginViewCancelHandler != null){
-            loginViewCancelHandler()
-            loginViewCancelHandler = null
-        }
-    })
-}
 
 // Disable default form behavior.
 loginForm.onsubmit = () => { return false }
 
 // Bind login button behavior.
 loginButton.addEventListener('click', () => {
-    // Disable form.
-    formDisabled(true)
-
-    // Show loading stuff.
-    loginLoading(true)
-
     AuthManager.addAccount(loginUsername.value).then((value) => {
         updateSelectedAccount(value)
         loginButton.innerHTML = loginButton.innerHTML.replace(Lang.queryJS('login.loggingIn'), Lang.queryJS('login.success'))
-        $('.circle-loader').toggleClass('load-complete')
-        $('.checkmark').toggle()
         setTimeout(() => {
             switchView(VIEWS.login, loginViewOnSuccess, 500, 500, async () => {
                 // Temporary workaround
@@ -168,32 +113,27 @@ loginButton.addEventListener('click', () => {
                     await prepareSettings()
                 }
                 loginViewOnSuccess = VIEWS.landing // Reset this for good measure.
-                loginCancelEnabled(false) // Reset this for good measure.
                 loginViewCancelHandler = null // Reset this for good measure.
                 loginUsername.value = ''
-                $('.circle-loader').toggleClass('load-complete')
-                $('.checkmark').toggle()
-                loginLoading(false)
                 loginButton.innerHTML = loginButton.innerHTML.replace(Lang.queryJS('login.success'), Lang.queryJS('login.login'))
-                formDisabled(false)
             })
         }, 1000)
     }).catch((displayableError) => {
-        loginLoading(false)
 
         let actualDisplayableError
         if(isDisplayableError(displayableError)) {
             msftLoginLogger.error('Error while logging in.', displayableError)
+            console.log("error trying to login" + displayableError)
             actualDisplayableError = displayableError
         } else {
             // Uh oh.
             msftLoginLogger.error('Unhandled error during login.', displayableError)
+            console.log("unhandled error trying to login" + displayableError)
             actualDisplayableError = Lang.queryJS('login.error.unknown')
         }
 
         setOverlayContent(actualDisplayableError.title, actualDisplayableError.desc, Lang.queryJS('login.tryAgain'))
         setOverlayHandler(() => {
-            formDisabled(false)
             toggleOverlay(false)
         })
         toggleOverlay(true)
