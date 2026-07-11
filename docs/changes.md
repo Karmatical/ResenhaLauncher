@@ -51,11 +51,6 @@ Removido login pela microsoft
 
 
 
-
-
-
-
-
     Resenhacraft Launcher
      - username
      - client side options (disable specific mods, custom cfg files visualizer/editor)
